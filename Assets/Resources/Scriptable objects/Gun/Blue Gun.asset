@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b43f2e9107dfc49826f55c95bfb6e4, type: 3}
+  m_Name: Blue Gun
+  m_EditorClassIdentifier: 
+  Name: Gun
+  ModelPrefab: {fileID: 792611461643704749, guid: 3c6bd2b04a727e3478d2374cd56c4529, type: 3}
+  SpawnPoint: {x: 0, y: 0, z: 0}
+  SpawnRotation: {x: 0, y: 0, z: 0}
+  ShootConfig: {fileID: 11400000, guid: a476ee8ba9366d846800b9ea2811807c, type: 2}
+  TrailConfig: {fileID: 11400000, guid: 56520394c73297f4785b82ca64dfd362, type: 2}
