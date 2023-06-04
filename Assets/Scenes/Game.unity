@@ -402,8 +402,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1905632765}
   - {fileID: 928963374}
+  - {fileID: 1905632765}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -735,7 +735,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 324845960}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!215 &928963375
 ReflectionProbe:
@@ -925,10 +925,10 @@ MonoBehaviour:
   volumeTrigger: {fileID: 963194228}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 2147483647
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -937,7 +937,7 @@ MonoBehaviour:
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
-    fastMode: 0
+    fastMode: 1
     keepAlpha: 0
   fog:
     enabled: 1
@@ -964,7 +964,7 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
@@ -1973,13 +1973,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905632764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -122.66644, y: -78.39455, z: 39900.895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 324845960}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1905632766
 MonoBehaviour:
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedProfile: {fileID: 11400000, guid: 1a76114379b353d4abbcc3de5ae11e6b, type: 2}
   isGlobal: 1
-  blendDistance: 0
+  blendDistance: 4.31
   weight: 1
   priority: 0
 --- !u!1 &1924055691
