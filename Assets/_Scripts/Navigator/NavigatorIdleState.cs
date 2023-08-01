@@ -7,6 +7,8 @@ public class NavigatorIdleState : NavigatorBaseState
 
     public override void StartState(NavigatorStateManager navigator)
     {
+        navigator.transform.localPosition = Vector3.zero;
+
         navigator.OnIdle.Invoke();
 
         n = NavigatorController.instance;
@@ -40,7 +42,9 @@ public class NavigatorIdleState : NavigatorBaseState
             
             _inHand = false;
             _inPlace = false;
-        }        
+        }
+
+        navigator.transform.Rotate( Vector3.right , 45f * Time.deltaTime);        
     }
 
     public override void OnTriggerEnterState(NavigatorStateManager navigator, Collider collider)

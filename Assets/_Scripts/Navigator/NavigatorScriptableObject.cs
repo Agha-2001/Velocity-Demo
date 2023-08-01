@@ -25,6 +25,6 @@ public class NavigatorScriptableObject : ScriptableObject
         Model.transform.localPosition = SpawnPoint;
         Model.transform.localRotation = Quaternion.Euler(SpawnRotation);
 
-        
+        NavLine = Model.GetComponentInChildren<LineRenderer>();
     }
 }

@@ -89,6 +89,12 @@ public class GunObject : ScriptableObject
         instance.gameObject.SetActive(false);
         TrailPool.Release(instance);
 
+        if(Hit.collider != null)
+        {
+
+            //if(Hit.collider.TryGetComponent<>)
+        }
+
     }
 
     private TrailRenderer CreateTrail()

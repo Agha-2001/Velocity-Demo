@@ -5,25 +5,21 @@ public class NavigatorThrownState : NavigatorBaseState
     NavigatorController n;
     Vector3 _destination;
 
+    bool stop;
+
     public override void StartState(NavigatorStateManager navigator)
     {
         navigator.OnThrown.Invoke();
+
+        stop = false;
 
         n = NavigatorController.instance;
 
         navigator.transform.SetParent(null);     
 
-        /*RaycastHit hitInfo;
-        Ray ray;           
+        //_destination = navigator.PlayerCamObject.GetHitPoint(Camera.main,3000f).point;
 
-        ray = n.PlayerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-
-        if(Physics.Raycast(ray, out hitInfo , 3000f))
-        {   
-            _destination = hitInfo.point;
-        }*/
-
-        _destination = navigator.PlayerCamObject.GetHitPoint(Camera.main,3000f).point;
+        _destination = Camera.main.transform.forward;
     }
 
     public override void UpdateState(NavigatorStateManager navigator)
@@ -35,12 +31,15 @@ public class NavigatorThrownState : NavigatorBaseState
 
     public override void FixedUpdateState(NavigatorStateManager navigator)
     {
-        navigator.transform.position = Vector3.MoveTowards(navigator.transform.position, _destination, n.Speed * Time.deltaTime);  
+        if(!stop)
+            navigator.transform.position = navigator.transform.position + _destination * n.Speed * Time.deltaTime;
+        //navigator.transform.position = Vector3.MoveTowards(navigator.transform.position, _destination, n.Speed * Time.deltaTime);  
     }
 
     public override void OnTriggerEnterState(NavigatorStateManager navigator, Collider collider)
     {
-        
+        if(collider.CompareTag("Arena"))
+            stop = true;
     }
 
     public override void OnClick(NavigatorStateManager navigator)
