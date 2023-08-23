@@ -9,7 +9,9 @@ public class NavigatorAttractState : NavigatorBaseState
     {
         navigator.OnAttract.Invoke();
 
-        n = NavigatorController.instance;
+        navigator.speedlines.Play();
+
+        n = NavigatorController.GetInstance();
         player = PlayerController.instance;
 
         player.Rb.isKinematic = true;
@@ -20,10 +22,13 @@ public class NavigatorAttractState : NavigatorBaseState
         player.Rb.isKinematic = false;
 
         Vector3 CurrentPosition = navigator.transform.position;
-        Vector3 PlayerPosition = player.Rb.position;        
+        Vector3 PlayerPosition = player.Rb.position;
 
-       if(Vector3.Distance(PlayerPosition,CurrentPosition) < n.DetectionRadius)
+        if (Vector3.Distance(PlayerPosition, CurrentPosition) < n.DetectionRadius)
+        {
+            navigator.speedlines.Stop();
             navigator.SwitchState(navigator.idleState);
+        }
 
         n.NavLine.positionCount = 2;
         n.NavLine.SetPosition(0, n.Throwpoint.transform.position);
@@ -39,12 +44,13 @@ public class NavigatorAttractState : NavigatorBaseState
 
     public override void OnTriggerEnterState(NavigatorStateManager navigator, Collider collider)
     {
-        
-            
+
+
     }
 
     public override void OnClick(NavigatorStateManager navigator)
     {
         navigator.SwitchState(navigator.idleState);
+        navigator.speedlines.Stop();
     }
 }

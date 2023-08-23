@@ -7,4 +7,5 @@ public class ShootConfigurationScriptableObject : ScriptableObject
 {
     public LayerMask HitMask;
     public float FireRate;
+    public float SphereRadius;
 }

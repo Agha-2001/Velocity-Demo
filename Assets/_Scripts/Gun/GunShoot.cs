@@ -14,9 +14,15 @@ public class GunShoot : MonoBehaviour
         Gun.Spawn(GunParent, this);
     }
 
+    private void Update()
+    {
+        Gun.TargetCheck();
+    }
+
     public void OnClickShoot()
     {
         Gun.Shoot();
         shoot.Invoke();
+        
     }
 }

@@ -7,17 +7,21 @@ public class StingerEnemyController : MonoBehaviour
     [HideInInspector] public StingerEnemyState currentState;
     [HideInInspector] public ChaseState chaseState;
     [HideInInspector] public AttackState attackState;
+    [HideInInspector] public SpawnState spawnState;
 
-
+    [HideInInspector] public Animator animator;
 
     private void Start()
     {
-        // Initialize the state machine
-        chaseState = ScriptableObject.CreateInstance<ChaseState>();
-        attackState = ScriptableObject.CreateInstance<AttackState>();
+        animator = GetComponent<Animator>();
 
-        // Set the initial state to spawn state
-        TransitionToState(ScriptableObject.CreateInstance<SpawnState>());
+        // Initialize the state machine
+        spawnState = new SpawnState();
+        chaseState = new ChaseState();
+        attackState = new AttackState();
+
+        currentState = spawnState;
+        currentState.StartState(this);
     }
 
     private void Update()
@@ -28,35 +32,16 @@ public class StingerEnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         currentState.FixedUpdateState(this);
-        drawTHE();
     }
 
-    public void TransitionToState(StingerEnemyState newState)
+    private void OnTriggerEnter(Collider other)
     {
-        if (currentState != null)
-        {
-            currentState.ExitState(this);
-        }
+        currentState.OnTriggerEnterState(this, other);
+    }
 
+    public void SwitchState(StingerEnemyState newState)
+    {
         currentState = newState;
-        currentState.EnterState(this);
-    }
-
-    public float rayLength = 10f;
-    public Color rayColor = Color.red;
-
-    void drawTHE()
-    {
-        // Get the forward direction of the game object
-        Vector3 forwardDirection = transform.forward;
-
-        // Set the starting position of the ray at the game object's position
-        Vector3 rayStartPos = transform.position;
-
-        // Set the ending position of the ray using the forward direction and ray length
-        Vector3 rayEndPos = rayStartPos + forwardDirection * rayLength;
-
-        // Draw the ray using the Debug.DrawRay method
-        Debug.DrawRay(rayStartPos, forwardDirection * rayLength, rayColor);
+        currentState.StartState(this);
     }
 }

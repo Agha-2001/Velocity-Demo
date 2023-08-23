@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 256
   FireRate: 0.5
+  SphereRadius: 8

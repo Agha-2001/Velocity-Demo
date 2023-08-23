@@ -18,3 +18,5 @@ MonoBehaviour:
   SpawnRotation: {x: 0, y: 0, z: 0}
   ShootConfig: {fileID: 11400000, guid: a476ee8ba9366d846800b9ea2811807c, type: 2}
   TrailConfig: {fileID: 11400000, guid: 56520394c73297f4785b82ca64dfd362, type: 2}
+  Hitting: {fileID: 11400000, guid: b0f8159e6eb6c17459ccbd29b81f51eb, type: 2}
+  Missing: {fileID: 11400000, guid: 8dfb2b1702cb81d4884bfc4a4c49b1e4, type: 2}

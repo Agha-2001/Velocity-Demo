@@ -11,10 +11,10 @@ public class NavigatorIdleState : NavigatorBaseState
 
         navigator.OnIdle.Invoke();
 
-        n = NavigatorController.instance;
+        n = NavigatorController.GetInstance();
 
         n.NavLine.positionCount = 0;
-        
+
 
         _inHand = false;
         _inPlace = false;
@@ -22,38 +22,38 @@ public class NavigatorIdleState : NavigatorBaseState
 
     public override void UpdateState(NavigatorStateManager navigator)
     {
-       if(navigator.transform.parent != n.Throwpoint.transform.parent)
+        if (navigator.transform.parent != n.Throwpoint.transform.parent)
         {
             _inHand = true;
-            
-            if(navigator.transform.position !=n.Throwpoint.transform.position)
+
+            if (navigator.transform.position != n.Throwpoint.transform.position)
                 _inPlace = true;
         }
     }
 
     public override void FixedUpdateState(NavigatorStateManager navigator)
     {
-        if(_inHand)
+        if (_inHand)
         {
             navigator.transform.SetParent(n.Throwpoint.transform);
 
-            if(_inPlace)
+            if (_inPlace)
                 navigator.transform.position = n.Throwpoint.transform.position;
-            
+
             _inHand = false;
             _inPlace = false;
         }
 
-        navigator.transform.Rotate( Vector3.right , 45f * Time.deltaTime);        
+        navigator.transform.Rotate(Vector3.right, 45f * Time.deltaTime);
     }
 
     public override void OnTriggerEnterState(NavigatorStateManager navigator, Collider collider)
     {
-        
+
     }
 
     public override void OnClick(NavigatorStateManager navigator)
     {
-        navigator.SwitchState(navigator.thrownState);   
+        navigator.SwitchState(navigator.thrownState);
     }
 }

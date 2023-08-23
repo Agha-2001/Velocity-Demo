@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f077d1572f70a64198b4b692f986d4f, type: 3}
   m_Name: Player Camera
   m_EditorClassIdentifier: 
-  CameraSensitivity: 14
+  CameraSensitivity: 10
   CameraShake: 1
   MinFOV: 1
   MaxFOV: 1

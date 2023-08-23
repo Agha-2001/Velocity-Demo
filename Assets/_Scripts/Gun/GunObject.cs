@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.VFX;
 
-[CreateAssetMenu( fileName = "Gun Object", menuName = "Scriptable Objects/Gun/Gun Object", order =0)]
+[CreateAssetMenu(fileName = "Gun Object", menuName = "Scriptable Objects/Gun/Gun Object", order = 0)]
 public class GunObject : ScriptableObject
 {
     public string Name;
@@ -14,6 +14,9 @@ public class GunObject : ScriptableObject
 
     public ShootConfigurationScriptableObject ShootConfig;
     public TrailConfigurationScriptableObject TrailConfig;
+
+    public GameEvent Hitting;
+    public GameEvent Missing;
 
     private MonoBehaviour ActiveMonoBehaviour;
     private GameObject Model;
@@ -28,23 +31,36 @@ public class GunObject : ScriptableObject
         TrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
 
         Model = Instantiate(ModelPrefab);
-        Model.transform.SetParent(parent,false);
+        Model.transform.SetParent(parent, false);
         Model.transform.localPosition = SpawnPoint;
         Model.transform.localRotation = Quaternion.Euler(SpawnRotation);
 
         ShootSystem = Model.GetComponentInChildren<VisualEffect>();
     }
 
+    public void TargetCheck()
+    {
+        Vector3 shootDirection = ShootSystem.transform.parent.transform.forward;
+        if (Physics.SphereCast(ShootSystem.transform.position, ShootConfig.SphereRadius, shootDirection, out RaycastHit hit, float.MaxValue, ShootConfig.HitMask))
+        {
+            Hitting.Invoke();
+        }
+        else
+        {
+            Missing.Invoke();
+        }
+    }
+
     public void Shoot()
     {
-        if(Time.time > ShootConfig.FireRate + LastShootTime)
+        if (Time.time > ShootConfig.FireRate + LastShootTime)
         {
             LastShootTime = Time.time;
             ShootSystem.Play();
             Vector3 shootDirection = ShootSystem.transform.parent.transform.forward;
             shootDirection.Normalize();
 
-            if(Physics.Raycast(ShootSystem.transform.position, shootDirection, out RaycastHit hit, float.MaxValue, ShootConfig.HitMask))
+            if (Physics.SphereCast(ShootSystem.transform.position, ShootConfig.SphereRadius, shootDirection, out RaycastHit hit, float.MaxValue, ShootConfig.HitMask))
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(ShootSystem.transform.position, hit.point, hit)
@@ -72,7 +88,7 @@ public class GunObject : ScriptableObject
         float distance = Vector3.Distance(StartPoint, EndPoint);
         float remainingDistance = distance;
 
-        while(remainingDistance > 0)
+        while (remainingDistance > 0)
         {
             instance.transform.position = Vector3.Lerp(StartPoint, EndPoint, Mathf.Clamp01(1 - (remainingDistance / distance)));
 
@@ -89,10 +105,13 @@ public class GunObject : ScriptableObject
         instance.gameObject.SetActive(false);
         TrailPool.Release(instance);
 
-        if(Hit.collider != null)
+        if (Hit.collider != null)
         {
 
-            //if(Hit.collider.TryGetComponent<>)
+            if (Hit.collider.TryGetComponent(out IDamagable damagable))
+            {
+                damagable.TakeDamage(1); //Gun will only do one point of damage
+            }
         }
 
     }

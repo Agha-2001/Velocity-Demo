@@ -13,9 +13,9 @@ public class NavigatorThrownState : NavigatorBaseState
 
         stop = false;
 
-        n = NavigatorController.instance;
+        n = NavigatorController.GetInstance();
 
-        navigator.transform.SetParent(null);     
+        navigator.transform.SetParent(null);
 
         //_destination = navigator.PlayerCamObject.GetHitPoint(Camera.main,3000f).point;
 
@@ -31,14 +31,14 @@ public class NavigatorThrownState : NavigatorBaseState
 
     public override void FixedUpdateState(NavigatorStateManager navigator)
     {
-        if(!stop)
+        if (!stop)
             navigator.transform.position = navigator.transform.position + _destination * n.Speed * Time.deltaTime;
         //navigator.transform.position = Vector3.MoveTowards(navigator.transform.position, _destination, n.Speed * Time.deltaTime);  
     }
 
     public override void OnTriggerEnterState(NavigatorStateManager navigator, Collider collider)
     {
-        if(collider.CompareTag("Arena"))
+        if (collider.CompareTag("Arena"))
             stop = true;
     }
 

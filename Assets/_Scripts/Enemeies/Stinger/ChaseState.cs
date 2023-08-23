@@ -2,27 +2,35 @@ using UnityEngine;
 
 public class ChaseState : StingerEnemyState
 {
-    GameObject player;   
-    public override void EnterState(StingerEnemyController enemy)
+    GameObject player;
+    public override void StartState(StingerEnemyController enemy)
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public override void UpdateState(StingerEnemyController enemy)
     {
-        if(Vector3.Distance(enemy.transform.position,player.transform.position) <= enemy.enemyData.attackRadius)
-            enemy.TransitionToState(enemy.attackState);
+        enemy.animator.Play("hover");
+    }
+
+    public override void OnTriggerEnterState(StingerEnemyController enemy, Collider collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collider.gameObject.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
+            enemy.SwitchState(enemy.attackState);
+        }
     }
 
     public override void FixedUpdateState(StingerEnemyController enemy)
     {
         Pathfinding(enemy);
         Move(enemy);
-    }
-
-    public override void ExitState(StingerEnemyController enemy)
-    {
-        
     }
 
     void Turn(StingerEnemyController e)
@@ -56,12 +64,12 @@ public class ChaseState : StingerEnemyState
             rayCastOffset -= Vector3.up;
         else if (Physics.Raycast(DOWN, e.transform.forward, out hit, e.enemyData.avoidanceDistance, e.enemyData.enemyMask))
             rayCastOffset += Vector3.up;
-        
+
         // for height
         if (Physics.Raycast(e.transform.position, e.transform.up, out hit, e.enemyData.avoidanceDistance, e.enemyData.enemyMask))
-        rayCastOffset -= Vector3.up;
+            rayCastOffset -= Vector3.up;
         else if (Physics.Raycast(e.transform.position, -e.transform.up, out hit, e.enemyData.avoidanceDistance, e.enemyData.enemyMask))
-        rayCastOffset += Vector3.up;
+            rayCastOffset += Vector3.up;
 
         // Avoidance behavior
         if (rayCastOffset != Vector3.zero)
@@ -85,6 +93,6 @@ public class ChaseState : StingerEnemyState
         else
             Turn(e);
     }
-    
+
 
 }

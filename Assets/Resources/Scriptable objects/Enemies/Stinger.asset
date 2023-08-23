@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a29214477695e4b837b2aa3247e3f5, type: 3}
   m_Name: Stinger
   m_EditorClassIdentifier: 
-  chaseSpeed: 20
-  turningSpeed: 2
+  chaseSpeed: 10
+  turningSpeed: 6
   enemyMask:
     serializedVersion: 2
     m_Bits: 384

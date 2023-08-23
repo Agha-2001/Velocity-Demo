@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a29214477695e4b837b2aa3247e3f5, type: 3}
   m_Name: Seeker
   m_EditorClassIdentifier: 
-  chaseSpeed: 10
-  turningSpeed: 5
+  chaseSpeed: 90
+  turningSpeed: 20
   enemyMask:
     serializedVersion: 2
     m_Bits: 384
-  avoidanceRadius: 5
-  avoidanceDistance: 5
-  attackRadius: 5
+  avoidanceRadius: 10
+  avoidanceDistance: 10
+  attackRadius: 10
   attackCoolDownTime: 5

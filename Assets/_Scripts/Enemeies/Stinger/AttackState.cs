@@ -2,45 +2,40 @@ using UnityEngine;
 
 public class AttackState : StingerEnemyState
 {
-    MeshRenderer mRend;
-    Color original;
     bool coolingDown;
     float currentTime;
-    public override void EnterState(StingerEnemyController enemy)
+    public override void StartState(StingerEnemyController enemy)
     {
-        mRend = enemy.GetComponent<MeshRenderer>();
-        
-        original = mRend.material.color;
-        mRend.material.color = Color.white;
-
         coolingDown = true;
         currentTime = 0f;
+        enemy.animator.Play("sting");
     }
 
     public override void UpdateState(StingerEnemyController enemy)
     {
-        if(coolingDown)
+        if (coolingDown)
         {
+
             currentTime += Time.deltaTime;
 
-            if(currentTime >= enemy.enemyData.attackCoolDownTime)
+            if (currentTime >= enemy.enemyData.attackCoolDownTime)
                 coolingDown = false;
         }
 
-        else if(!coolingDown)
+        else if (!coolingDown)
         {
-            enemy.TransitionToState(enemy.chaseState);
+            enemy.SwitchState(enemy.chaseState);
         }
-            
+
     }
 
     public override void FixedUpdateState(StingerEnemyController enemy)
     {
-        
+
     }
 
-    public override void ExitState(StingerEnemyController enemy)
+    public override void OnTriggerEnterState(StingerEnemyController enemy, Collider collider)
     {
-        mRend.material.color = original;
+
     }
 }

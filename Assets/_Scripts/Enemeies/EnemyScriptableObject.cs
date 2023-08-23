@@ -10,5 +10,4 @@ public class EnemyScriptableObject : ScriptableObject
     public float avoidanceDistance;
     public float attackRadius;
     public float attackCoolDownTime;
-    // Add any other public data specific to the enemy here
 }

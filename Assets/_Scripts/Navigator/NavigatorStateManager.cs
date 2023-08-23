@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class NavigatorStateManager : MonoBehaviour
 {
     public CameraScriptableObject PlayerCamObject;
 
-    public GameEvent OnIdle,OnThrown,OnAttract;
+    public GameEvent OnIdle, OnThrown, OnAttract;
+    public VisualEffect speedlines;
 
-    [Header ("State Machine")]
+    [Header("State Machine")]
     NavigatorBaseState currentState;
     public NavigatorIdleState idleState = new NavigatorIdleState();
     public NavigatorThrownState thrownState = new NavigatorThrownState();
@@ -16,6 +18,7 @@ public class NavigatorStateManager : MonoBehaviour
 
     void Start()
     {
+        speedlines.Stop();
 
         currentState = idleState;
 
@@ -32,9 +35,9 @@ public class NavigatorStateManager : MonoBehaviour
         currentState.FixedUpdateState(this);
     }
 
-    void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other)
     {
-        currentState.OnTriggerEnterState(this,other);    
+        currentState.OnTriggerEnterState(this, other);
     }
 
     public void SwitchState(NavigatorBaseState state)

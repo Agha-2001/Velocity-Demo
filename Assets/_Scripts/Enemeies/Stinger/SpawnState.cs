@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class SpawnState : StingerEnemyState
 {
-    public override void EnterState(StingerEnemyController enemy)
+    public override void StartState(StingerEnemyController enemy)
     {
-        // Add spawn state logic here
-        Debug.Log("Entering Spawn State");
+
     }
 
     public override void UpdateState(StingerEnemyController enemy)
@@ -13,17 +12,16 @@ public class SpawnState : StingerEnemyState
         // Add spawn state update logic here
 
         // Transition to the chase state after a certain condition is met
-        enemy.TransitionToState(enemy.chaseState);
+        enemy.SwitchState(enemy.chaseState);
     }
 
     public override void FixedUpdateState(StingerEnemyController enemy)
     {
-           
+
     }
 
-    public override void ExitState(StingerEnemyController enemy)
+    public override void OnTriggerEnterState(StingerEnemyController enemy, Collider collider)
     {
-        
-    }
 
+    }
 }
