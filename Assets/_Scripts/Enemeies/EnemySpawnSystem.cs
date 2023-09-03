@@ -12,8 +12,8 @@ public class EnemySpawnSystem : Singleton<EnemySpawnSystem>
     BoxCollider spawnBounds;
     List<Vector3> spawnPoints = new List<Vector3>();
 
-    int activeEnemiesCount = 0;
-    int destroyedEnemiesCount = 0;
+    public int activeEnemiesCount = 0;
+    public int destroyedEnemiesCount = 0;
 
     private void Start()
     {
@@ -27,18 +27,24 @@ public class EnemySpawnSystem : Singleton<EnemySpawnSystem>
 
         Array.Sort(enemies);    // enemies list is sorted based on SpawnCost.
         Array.Reverse(enemies);
+
+        foreach (SpawnEnemy enemy in enemies)
+        {
+            enemy.InitializePool();
+        }
     }
 
-    private List<GameObject> CalculateEnemies(int SpawnValue)
+    private Stack<SpawnEnemy> CalculateEnemies(int SpawnValue)
     {
-        List<GameObject> SelectedEnemies = new List<GameObject>();
+        Stack<SpawnEnemy> SelectedEnemies = new Stack<SpawnEnemy>();
 
         int iterator = 0;
+
         while (SpawnValue > 0 && iterator < enemies.Length)
         {
             if (SpawnValue >= enemies[iterator].SpawnCost)
             {
-                SelectedEnemies.Add(enemies[iterator].EnemyPrefab);
+                SelectedEnemies.Push(enemies[iterator]);
                 SpawnValue -= enemies[iterator].SpawnCost;
             }
 
@@ -88,36 +94,19 @@ public class EnemySpawnSystem : Singleton<EnemySpawnSystem>
         activeEnemiesCount = 0;
         destroyedEnemiesCount = 0;
 
-        List<GameObject> temp = CalculateEnemies(SpawnValue);
+        Stack<SpawnEnemy> temp = CalculateEnemies(SpawnValue);
 
         CalculateSpawnPoints(temp.Count);
 
         int i = 0;
 
-        foreach (GameObject gameObject in temp)
+        foreach (SpawnEnemy spawn in temp)
         {
-            GameObject newEnemy = Instantiate(gameObject, spawnPoints[i], Quaternion.identity);
-            EnemyHealth enemyHealth = newEnemy.GetComponent<EnemyHealth>();
-            enemyHealth.OnDeath += HandleEnemyDeath;
+            GameObject newEnemy = spawn.SpawnFromPool(spawnPoints[i], Quaternion.identity);
+
             activeEnemiesCount++;
             i++;
         }
-    }
-
-    private void HandleEnemyDeath(Vector3 deathPosition)
-    {
-        destroyedEnemiesCount++;
-        activeEnemiesCount--;
-    }
-
-    public int GetActiveEnemiesCount()
-    {
-        return activeEnemiesCount;
-    }
-
-    public int GetDestroyedEnemiesCount()
-    {
-        return destroyedEnemiesCount;
     }
 
 }

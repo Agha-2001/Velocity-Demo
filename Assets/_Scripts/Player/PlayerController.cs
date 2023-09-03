@@ -6,22 +6,20 @@ public class PlayerController : MonoBehaviour
 {
     [HideInInspector] public static PlayerController instance;
 
-    [Header ("Attributes")]
+    [Header("Attributes")]
     [Tooltip("Highest speed the player can reach")]
     public float MaxSpeed;
-    [Tooltip("Max HP of the player")]
-    public float MaxHealth;
 
-    [Header ("References")]
+    [Header("References")]
     [HideInInspector] public Rigidbody Rb;
 
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
-        
-        else if(instance != this)
+
+        else if (instance != this)
             Destroy(this);
 
         Rb = GameObject.Find("Player").GetComponent<Rigidbody>();

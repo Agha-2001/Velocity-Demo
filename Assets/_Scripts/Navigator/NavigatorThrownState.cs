@@ -17,8 +17,6 @@ public class NavigatorThrownState : NavigatorBaseState
 
         navigator.transform.SetParent(null);
 
-        //_destination = navigator.PlayerCamObject.GetHitPoint(Camera.main,3000f).point;
-
         _destination = Camera.main.transform.forward;
     }
 

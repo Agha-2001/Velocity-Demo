@@ -3,7 +3,32 @@ guid: 69f775313240bf04d87f7b074d37297e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 99bb8b4201fd72647b653a5c3a06978c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: d80ccdc0da706f24f96db10bc099b832, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stage base material
+    second: {fileID: 2100000, guid: 89378c781e285884ea70bef8b3d261bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cieling  light
+    second: {fileID: 2100000, guid: 0f444e3caf069554cac70461c278d4a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cieling base material
+    second: {fileID: 2100000, guid: 5138c119e590bd343a406e8400c67ae4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

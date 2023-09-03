@@ -22,7 +22,8 @@ public class GunShoot : MonoBehaviour
     public void OnClickShoot()
     {
         Gun.Shoot();
+        AudioManager.GetInstance().Play("Shoot");
         shoot.Invoke();
-        
+
     }
 }

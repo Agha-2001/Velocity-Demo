@@ -29,14 +29,16 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
         if (damageTaken != 0)
         {
+            AudioManager.GetInstance().Play("EnemyHit");
+
             OnTakeDamage?.Invoke(damageTaken);
         }
 
         if (CurrentHealth == 0 && damageTaken != 0)
         {
-            OnDeath?.Invoke(transform.position);
+            OnDeath?.Invoke(this.gameObject);
             ScoreManager.GetInstance().IncreaseScore(deathScore);
-            Destroy(this.gameObject);
         }
     }
+
 }

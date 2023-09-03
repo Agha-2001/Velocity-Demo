@@ -34,11 +34,16 @@ public class LaunchState : SeekerEnemyState
 
     public override void UpdateState(SeekerEnemyController enemy)
     {
+        enemy.animator.Play("Dash");
+
         if (Vector3.Distance(player.transform.position, enemy.transform.position) < enemy.enemyData.avoidanceDistance)
         {
             playerHealth.TakeDamage(1);
             enemy.SwitchState(enemy.chargeUpState);
         }
+
+
+
 
         if (!DetectObstacle(enemy))
         {

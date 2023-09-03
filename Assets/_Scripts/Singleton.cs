@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
@@ -36,12 +35,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     {
         if (instance == null)
         {
-            instance = this as T;
+            instance = this as T;                   // If another instance does not exists.
             DontDestroyOnLoad(gameObject);
         }
         else if (instance != this as T)
         {
-            Destroy(gameObject);
+            Destroy(gameObject);                    // If another instance exists.
         }
         else { DontDestroyOnLoad(gameObject); }
     }

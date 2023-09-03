@@ -5,8 +5,6 @@ using UnityEngine.VFX;
 
 public class NavigatorStateManager : MonoBehaviour
 {
-    public CameraScriptableObject PlayerCamObject;
-
     public GameEvent OnIdle, OnThrown, OnAttract;
     public VisualEffect speedlines;
 

@@ -28,6 +28,8 @@ public class ChargeUpState : SeekerEnemyState
 
     public override void UpdateState(SeekerEnemyController enemy)
     {
+        enemy.animator.Play("Fly");
+
         Turn(enemy);
 
         if (currentTime >= enemy.enemyData.attackCoolDownTime)

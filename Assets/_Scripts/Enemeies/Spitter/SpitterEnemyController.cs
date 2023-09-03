@@ -12,9 +12,13 @@ public class SpitterEnemyController : MonoBehaviour
     public EnemyScriptableObject enemyData;
     public GameObject projectilePrefab;
 
+    [HideInInspector] public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         spitState = new SpitState();
         moveState = new MoveState();
         spawnState = new SpitterSpawnState();

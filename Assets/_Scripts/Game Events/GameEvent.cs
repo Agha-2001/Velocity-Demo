@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Game Event", fileName ="New Game Event")]
+[CreateAssetMenu(menuName = "Game Event", fileName = "New Game Event")]
 public class GameEvent : ScriptableObject
 {
     HashSet<GameEventListener> _listeners = new HashSet<GameEventListener>();
 
     public void Invoke()
     {
-        foreach(var globalEventListner in _listeners)
+        foreach (var globalEventListner in _listeners)
             globalEventListner.RaiseEvent();
     }
 

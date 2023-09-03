@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class InputBuffer : MonoBehaviour
 {
     public float bufferTime = 0.5f; // Buffer time in seconds
-    public Button targetButton; // The UI button to be clicked
-
-    private bool isBuffering = false;
+    Button targetButton; // The UI button to be clicked
+    bool isBuffering = false;
 
     // UnityEvent to invoke when the buffer time has passed
     public UnityEvent onClickBuffered;
 
     private void Start()
     {
+        targetButton = GetComponent<Button>();
         // Add the button click listener
         targetButton.onClick.AddListener(ButtonClickHandler);
     }

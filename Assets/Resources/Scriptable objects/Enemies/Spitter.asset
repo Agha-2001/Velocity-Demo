@@ -20,4 +20,4 @@ MonoBehaviour:
   avoidanceRadius: 5
   avoidanceDistance: 5
   attackRadius: 5
-  attackCoolDownTime: 5
+  attackCoolDownTime: 8

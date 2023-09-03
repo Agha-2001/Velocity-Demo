@@ -19,7 +19,7 @@ public class SensitivitySlider : MonoBehaviour
         LoadValues();
     }
 
-    public void SensitivitySet(float sensitivity)
+    public void SensitivitySet(float sensitivity = 12.5f)
     {
         textMeshProUGUI.text = sensitivity.ToString("0.0");
         SaveSensitivity();

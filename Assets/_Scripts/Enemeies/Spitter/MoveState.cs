@@ -25,6 +25,8 @@ public class MoveState : SpitterEnemyState
 
     public override void UpdateState(SpitterEnemyController enemy)
     {
+        enemy.animator.Play("Hover");
+
         if (Time.time - lastThrowTime >= enemy.enemyData.attackCoolDownTime)
         {
             lastThrowTime = Time.time;

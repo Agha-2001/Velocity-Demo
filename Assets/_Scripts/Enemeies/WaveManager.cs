@@ -29,7 +29,7 @@ public class WaveManager : Singleton<WaveManager>
     // Update is called once per frame
     void Update()
     {
-        if (!isWaveInProgress && spawnSystem.GetActiveEnemiesCount() == 0)
+        if (!isWaveInProgress && spawnSystem.activeEnemiesCount == 0)
         {
 
 

@@ -11,9 +11,13 @@ public class SeekerEnemyController : MonoBehaviour
 
     public EnemyScriptableObject enemyData;
     public ParticleSystem charge;
+
+    [HideInInspector] public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         spawnState = new SeekerSpawnState();
         launchState = new LaunchState();
         chargeUpState = new ChargeUpState();

@@ -19,13 +19,16 @@ public class SpitState : SpitterEnemyState
     public override void StartState(SpitterEnemyController enemy)
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
         ThrowProjectile(enemy);
-        enemy.SwitchState(enemy.moveState);
     }
 
     public override void UpdateState(SpitterEnemyController enemy)
     {
-
+        if (enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Spit") && enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            enemy.SwitchState(enemy.moveState);
+        }
     }
 
     private void ThrowProjectile(SpitterEnemyController e)
@@ -33,5 +36,9 @@ public class SpitState : SpitterEnemyState
         GameObject newProjectile = GameObject.Instantiate(e.projectilePrefab, e.transform.position, e.transform.rotation);
         Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
         projectileComponent.LaunchProjectile((player.transform.position - e.transform.position).normalized * (e.enemyData.chaseSpeed * 2));
+
+        e.animator.Play("Spit");
+
+
     }
 }
